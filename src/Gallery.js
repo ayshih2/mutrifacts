@@ -3,10 +3,6 @@ import { Button, Image, List, Row, Col, Divider, Typography, Modal } from 'antd'
 import './Gallery.css';
 import Label from './Label.js';
 import LazyLoad from 'react-lazyload';
-import { CSSTransitionGroup } from 'react-transition-group';
-import ReactCSSTransitionGroup from 'react-transition-group';
-import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
-import Info from './Info.js';
 
 const { Title } = Typography;
 
@@ -122,7 +118,7 @@ class Gallery extends React.Component {
             <Button key="2" type="primary" onClick={this.handleOk}>Close</Button>
           ]}
         >          
-          <Label className="sad" playlist={this.state.curr_playlist}/>
+          <Label playlist={this.state.curr_playlist}/>
         </Modal>
       </div>
     );    

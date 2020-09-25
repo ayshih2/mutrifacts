@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './Label.css';
 import './App.css';
-import { List, Row, Col, Divider, Typography } from 'antd';
+import { Typography } from 'antd';
 const { Title } = Typography;
 
 class Label extends React.Component {

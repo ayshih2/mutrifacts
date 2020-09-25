@@ -22,8 +22,6 @@ var cookieParser = require('cookie-parser');
 var client_id = process.env.REACT_APP_CLIENT_ID; // Your client id
 var client_secret = process.env.REACT_APP_CLIENT_SECRET; // Your secret
 var redirect_uri = process.env.REACT_APP_REDIRECT_URI; // Your redirect uri
-console.log("yuh")
-console.log(process.env.REACT_APP_CLIENT_ID);
 
 /**
  * Generates a random string containing numbers and letters

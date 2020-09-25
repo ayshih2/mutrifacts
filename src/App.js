@@ -1,16 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
-import Label from './Label.js';
 import Gallery from './Gallery.js'
 import { Button } from 'antd';
 import './App.css';
-import { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
 
 class App extends React.Component {
   constructor(){
@@ -43,8 +34,6 @@ class App extends React.Component {
     var access_token = params.access_token,
       refresh_token = params.refresh_token,
       error = params.error;
-    console.log(params);
-
     spotifyApi.setAccessToken(access_token);
     
     const connectSpotify = access_token ? (
