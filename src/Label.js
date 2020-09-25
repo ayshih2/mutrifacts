@@ -1,7 +1,7 @@
 import React from 'react';
 import './Label.css';
 import './App.css';
-import { Typography } from 'antd';
+import { List, Typography } from 'antd';
 const { Title } = Typography;
 
 class Label extends React.Component {
