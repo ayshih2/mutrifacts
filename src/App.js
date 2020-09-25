@@ -40,7 +40,7 @@ class App extends React.Component {
       <Gallery spotifyApi={spotifyApi}/>
     ) : (
       <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100vh"}}>
-        <Button href="http://localhost:8888/login">Log in</Button>
+        <Button href="https://music-nutrifacts-server.herokuapp.com/login">Log in</Button>
       </div>
     );
 
@@ -53,17 +53,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-{/* <div className="App" style={{padding: "20px"}}>
-        
-<Route path="/user/:accessToken/:refreshToken" component={User} />
-{<Gallery />
-<Label /> }
-</div> */}
-
-// return (
-//   <Router>
-//     <Route path="http://localhost:3000/:accessToken/:refreshToken" component={Gallery} />
-//     <Route path="/"><a href="http://localhost:8888/login">Log in</a></Route>
-//   </Router>
-// );

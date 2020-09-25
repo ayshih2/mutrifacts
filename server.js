@@ -10,8 +10,7 @@ const result = require('dotenv').config();
 if (result.error) {
   throw result.error
 }
- 
-console.log(result.parsed)
+
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var cors = require('cors');
