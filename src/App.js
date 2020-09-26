@@ -23,7 +23,7 @@ class App extends React.Component {
   }
 
   render() {
-
+    // button href eventually needs to be changed to deployed backend server? https://music-nutrifacts-server.herokuapp.com/login
     var SpotifyWebApi = require('spotify-web-api-node');
 
     // credentials are optional
@@ -33,14 +33,14 @@ class App extends React.Component {
 
     var access_token = params.access_token,
       refresh_token = params.refresh_token,
-      error = params.error;
+      error = params.error; 
     spotifyApi.setAccessToken(access_token);
     
     const connectSpotify = access_token ? (
-      <Gallery spotifyApi={spotifyApi}/>
+      <Gallery spotifyApi={spotifyApi} />
     ) : (
       <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100vh"}}>
-        <Button href="https://music-nutrifacts-server.herokuapp.com/login">Log in</Button>
+        <Button href="http://localhost:8888/login">Log in</Button>
       </div>
     );
 
@@ -51,5 +51,7 @@ class App extends React.Component {
     );
   }
 }
+
+//<Gallery spotifyApi={spotifyApi}/>
 
 export default App;

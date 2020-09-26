@@ -11,9 +11,11 @@ class Gallery extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       playlists: [],
       curr_playlist: null,
+      audio_features: [],
       visible: false,
     };
   }
@@ -39,14 +41,14 @@ class Gallery extends React.Component {
       }
     );  
     
-    var get_playlists = spotifyApi.getUserPlaylists(user_id).then(function(data) {
+    var get_all_playlists = spotifyApi.getUserPlaylists(user_id).then(function(data) {
       console.log('Retrieved playlists', data.body);
       return data.body;
     }).catch(function (err) {
       console.error(err);
     });
 
-    get_playlists.then((data) => {
+    get_all_playlists.then((data) => {
       this.setState({
         playlists: data.items,
         curr_playlist: null
@@ -57,21 +59,106 @@ class Gallery extends React.Component {
   state = { visible: false };
 
   showModal = (playlist, idx) => {
-    this.setState({
-      visible: true,
-      curr_playlist: playlist,
+    const { spotifyApi, access_token } = this.props;
+    var get_playlist = spotifyApi.getPlaylist(playlist.id)
+    .then(function(data) {
+      console.log('Some information about this playlist', data.body);
+      return data.body;
+    }, function(err) {
+      console.log('Something went wrong!', err);
     });
+
+    console.log(get_playlist);
+
+    get_playlist.then((data) => {
+      console.log(":////////")
+      console.log(data)
+      this.setState({
+        visible: true,
+        curr_playlist: data
+      }, this.calcPlaylistAudioFeatures);
+    });
+
+    console.log("u talking crazy with that " + access_token);
+
+    // const individualTracksUrl = {
+    //   url: `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`,
+    //   headers: { 'Authorization': `Bearer ${access_token}` },
+    //   json: true
+    // }
+
+    // console.log("aklfjsdlkfj");
+    // fetch(individualTracksUrl).then(response => response.json())
+    // .then(data => console.log(data));
+
+
+    // this.setState({
+    //   visible: true,
+    //   curr_playlist: playlist,
+    // });
   };
 
+  async calcPlaylistAudioFeatures() {
+    const { spotifyApi } = this.props;
+    var track_ids = [];
+    (this.state.curr_playlist.tracks.items).map((track_obj) => {
+      if (track_obj.track) {
+        track_ids.push(track_obj.track.id);
+      }
+    });
+
+    var getAudioFeatures = spotifyApi.getAudioFeaturesForTracks(track_ids)
+    .then(function(data) {
+      console.log(data.body);
+      return data.body;
+    }, function(err) {
+      console.log("failed");
+    });
+
+    console.log(getAudioFeatures);
+
+    var audio_features = []
+    await getAudioFeatures.then((data) => {
+      this.setState({
+        audio_features: data.audio_features
+      });
+      //audio_features = data.audio_features;
+    });
+
+
+    // console.log("yee")
+    // console.log(audio_features)
+    // var num_valid_songs, danceability_sum, energy_sum, loudness_sum, valence_sum, tempo_sum, duration;
+    // num_valid_songs = danceability_sum = energy_sum = loudness_sum = valence_sum = tempo_sum = duration = 0;
+    // console.log(duration)
+    // audio_features.map((song) => {
+    //   // make sure it's not null
+    //   if (song) {
+    //     num_valid_songs += 1;
+    //     danceability_sum += song.danceability;
+    //     energy_sum += song.energy;
+    //     loudness_sum += song.loudness;
+    //     valence_sum += song.valence;
+    //     tempo_sum += song.tempo;
+    //     duration += song.duration;
+    //   }
+    // });
+    // console.log(duration)
+
+
+    // // convert duration from milliseconds to hours mins
+    // const minutes = Math.floor((duration / (1000 * 60)) % 60);
+    // const hours   = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  }
+
   handleOk = e => {
-    console.log(e);
     this.setState({
       visible: false,
     });
   };
 
   handleCancel = e => {
-    console.log(e);
     this.setState({
       visible: false,
     });
@@ -87,7 +174,6 @@ class Gallery extends React.Component {
       }
       return acc;
     }, []);   
-    console.log(res);
     
     return (
       <div className="main">
@@ -118,7 +204,7 @@ class Gallery extends React.Component {
             <Button key="2" type="primary" onClick={this.handleOk}>Close</Button>
           ]}
         >          
-          <Label playlist={this.state.curr_playlist}/>
+          <Label playlist={this.state.curr_playlist} audio_features={this.state.audio_features} spotifyApi={this.props}/>
         </Modal>
       </div>
     );    

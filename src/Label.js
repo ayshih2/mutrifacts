@@ -2,7 +2,7 @@ import React from 'react';
 import './Label.css';
 import './App.css';
 import { List, Typography } from 'antd';
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 class Label extends React.Component {
 
@@ -10,27 +10,63 @@ class Label extends React.Component {
     super(props);
     this.state = {
       playlist: this.props.playlist,
+      spotifyApi: this.props.spotifyApi,
+      audio_features: this.props.audio_features
     };
   }
 
-  componentDidMount() {
-
-  }
-
   render () {
+    const { playlist, audio_features } = this.props;
+    var new_background_img = playlist.images[0].url;
+    console.log("yet")
+    console.log(audio_features)
 
-    const playlist = this.props.playlist;
+    var num_valid_songs, danceability_sum, energy_sum, loudness_sum, valence_sum, tempo_sum, duration;
+    num_valid_songs = danceability_sum = energy_sum = loudness_sum = valence_sum = tempo_sum = duration = 0;    
+    audio_features.map((song) => {
+      // make sure it's not null
+      if (song) {
+        num_valid_songs += 1;
+        danceability_sum += song.danceability;
+        energy_sum += song.energy;
+        loudness_sum += song.loudness;
+        valence_sum += song.valence;
+        tempo_sum += song.tempo;
+        duration += song.duration_ms;
+      }
+    });
 
-    var data = [
-      'Danceability',
-      'Energy',
-      'Loudness',
-      'Valence',
-      'Average Temp',
+    console.log(duration + "mins")
+    const minutes = Math.floor((duration / (1000 * 60)) % 60);
+    const hours   = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    const playlist_details = [
+      {
+        id: 'Danceability',
+        value: (danceability_sum / num_valid_songs).toFixed(2)
+      },
+      {
+        id: 'Energy',
+        value: (energy_sum / num_valid_songs).toFixed(2)
+      },
+      {
+        id: 'Loudness',
+        value: (loudness_sum / num_valid_songs).toFixed(2)
+      },
+      {
+        id: 'Valence',
+        value: (valence_sum / num_valid_songs).toFixed(2)
+      },
+      {
+        id: 'Tempo',
+        value: (tempo_sum / num_valid_songs).toFixed(2)
+      },
     ];
 
-    var new_background_img = playlist.images[0].url;
-    console.log(new_background_img);
+    console.log(playlist.name.length + " yuh");
+
+    const playlist_by_str = playlist.name + " by " + playlist.owner.display_name;
+    const formatted_playlist_by_str = (playlist_by_str.length < 55) ? playlist_by_str : (playlist_by_str.substring(0, 54) + "...")
 
     return (
       <div className="parent-div" >
@@ -41,10 +77,10 @@ class Label extends React.Component {
         
         <Title>Nutrition Facts</Title>
         <div className="playlist-gen-info">
-          <p style={{fontSize: "medium"}}>nectar by annabelleshih</p>
+          <p style={{fontSize: "medium"}}>{formatted_playlist_by_str}</p>
           <div className="runtime">
             <span>Runtime</span>
-            <span style={{float: "right"}}>4 hr 13 min</span>
+            <span style={{float: "right"}}>{(hours > 0) ? (hours + ' hrs') : ''} {minutes} mins</span>
           </div>
         </div>
         <div className="song-info">
@@ -52,16 +88,18 @@ class Label extends React.Component {
             Total Number of <br /> 
             <span className="song-text">Songs</span>
           </span>
-          <span className="num-song-text">70</span>
+          <span className="num-song-text">{playlist.tracks.total}</span>
         </div>
         <div className="breakdown">
           <List
-            dataSource={data}
+            dataSource={playlist_details}
             header={<div style={{fontWeight: "500", lineHeight: "3px", float: "right"}}>Average Value*</div>}
-            renderItem={item => 
+            renderItem={(item) => 
               <List.Item style={{lineHeight: "3px"}}>
-                <span style={{fontWeight: "500", float: "left"}}>{item}</span>
-                <span style={{float: "right"}}>{70}</span>
+                <div style={{display: "inline", float: "left"}}>
+                <span style={{fontWeight: "500"}}>{item.id}</span><br/>
+                </div>
+                <span style={{float: "right"}}>{item.value}</span>
               </List.Item>}
           />
         </div>
@@ -69,28 +107,18 @@ class Label extends React.Component {
           <List>
             <List.Item style={{lineHeight: "3px"}}>
               <span style={{float: "left"}}>Followers</span>
-              <span style={{float: "right"}}>0</span>
+              <span style={{float: "right"}}>{ (playlist.followers !== undefined) ? playlist.followers.total : 20394820398420398}</span>
             </List.Item>
             <List.Item style={{lineHeight: "3px"}}>
-              <span style={{float: "left"}}>Collaborative</span>
-              <span style={{float: "right"}}>Y</span>
+              <span style={{float: "left"}}>Public</span>
+              <span style={{float: "right"}}>{(playlist.public) ? 'Y' : 'N'}</span>
             </List.Item>
           </List>
         </div>
         <div className="footer-text">
-          *Having Danceability describes how suitable a track is for dancing based on tempo, beat strength, etc. Energy represents 
-        a perceptual measure of intensity and activity. Loudness values are averaged across the entire track and are 
-        useful for comparing relative loudness of tracks. Valence describing the musical positiveness conveyed by a track where a
-        higher value represents a more positive track. Tempo is the speed or pace of a given piece (BPM).
-        Danceability describes how suitable a track is for dancing based on tempo, beat strength, etc. Energy represents 
-        a perceptual measure of intensity and activity. Loudness values are averaged across the entire track and are 
-        useful for comparing relative loudness of tracks. Valence describing the musical positiveness conveyed by a track where a
-        higher value represents a more positive track. Tempo is the speed or pace of a given piece (BPM).
-        Danceability describes how suitable a track is for dancing based on tempo, beat strength, etc. Energy represents 
-        a perceptual measure of intensity and activity. Loudness values are averaged across the entire track and are 
-        useful for comparing relative loudness of tracks. Valence describing the musical positiveness conveyed by a track where a
-        higher value represents a more positive track. Tempo is the speed or pace of a given piece (BPM).
-          
+          *Local songs are not included. {
+            (playlist.description.length === 0) ? (playlist.owner.display_name + " did not provide a description for this playlist.") : playlist.description
+          }
         </div>
       </div>
 
