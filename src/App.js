@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import './App.css';
 
 class App extends React.Component {
+  
   constructor(){
     super();
     const params = this.getHashParams();
@@ -31,9 +32,7 @@ class App extends React.Component {
 
     var params = this.getHashParams();
 
-    var access_token = params.access_token,
-      refresh_token = params.refresh_token,
-      error = params.error; 
+    var access_token = params.access_token;
     spotifyApi.setAccessToken(access_token);
     
     const connectSpotify = access_token ? (
@@ -51,7 +50,5 @@ class App extends React.Component {
     );
   }
 }
-
-//<Gallery spotifyApi={spotifyApi}/>
 
 export default App;

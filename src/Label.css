@@ -84,3 +84,16 @@ body {
 .extra-info {
   border-bottom: 3px solid black;
 }
+
+.label > .breakdown > .ant-list-split > .ant-list-header {
+  border-bottom: 1px solid black !important;
+}
+
+.label > .breakdown > .ant-list-split > .ant-spin-nested-loading > .ant-spin-container > .ant-list-items > .ant-list-item {
+  border-bottom: 1px solid black !important;
+  margin: -5px auto;
+}
+
+.extra-info > .ant-list > .ant-spin-nested-loading > .ant-spin-container > .ant-list-item {
+  border-bottom: 1px solid black !important;
+}

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Button, Image, List, Row, Col, Divider, Typography, Modal } from 'antd';
+import { Button, Image, Row, Col, Typography, Modal } from 'antd';
 import './Gallery.css';
 import Label from './Label.js';
-import LazyLoad from 'react-lazyload';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
@@ -34,16 +33,7 @@ class Gallery extends React.Component {
     }, function(err) {
       console.log('Something went wrong!', err);
     });
-
-    spotifyApi.getArtistAlbums('2WuKU0SYZOQyY3MmE4vtez').then(
-      function(data) {
-        console.log('Artist albums', data.body);
-      },
-      function(err) {
-        console.error(err);
-      }
-    );  
-    
+ 
     var get_all_playlists = spotifyApi.getUserPlaylists(user_id).then(function(data) {
       console.log('Retrieved playlists', data.body);
       return data.body;
@@ -62,7 +52,7 @@ class Gallery extends React.Component {
   state = { visible: false };
 
   showModal = (playlist, idx) => {
-    const { spotifyApi, access_token } = this.props;
+    const { spotifyApi } = this.props;
     var get_playlist = spotifyApi.getPlaylist(playlist.id)
     .then(function(data) {
       console.log('Some information about this playlist', data.body);
@@ -71,11 +61,7 @@ class Gallery extends React.Component {
       console.log('Something went wrong!', err);
     });
 
-    console.log(get_playlist);
-
     get_playlist.then((data) => {
-      console.log(":////////")
-      console.log(data)
       this.setState({
         visible: true,
         curr_playlist: data
@@ -100,14 +86,10 @@ class Gallery extends React.Component {
       console.log("failed");
     });
 
-    console.log(getAudioFeatures);
-
-    var audio_features = []
     await getAudioFeatures.then((data) => {
       this.setState({
         audio_features: data.audio_features
       });
-      //audio_features = data.audio_features;
     });
 
   }
