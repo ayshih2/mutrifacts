@@ -119,7 +119,7 @@ class Label extends React.Component {
             <List>
               <List.Item style={{lineHeight: "3px"}}>
                 <span style={{float: "left"}}>Followers</span>
-                <span style={{float: "right"}}>{ (playlist.followers !== undefined) ? playlist.followers.total : 20394820398420398}</span>
+                <span style={{float: "right"}}>{ (playlist.followers !== undefined) ? playlist.followers.total : 0}</span>
               </List.Item>
               <List.Item style={{lineHeight: "3px"}}>
                 <span style={{float: "left"}}>Public</span>
