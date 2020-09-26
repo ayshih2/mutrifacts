@@ -4,6 +4,7 @@ import './App.css';
 import { List, Typography } from 'antd';
 const { Title, Paragraph } = Typography;
 
+
 class Label extends React.Component {
 
   constructor(props) {

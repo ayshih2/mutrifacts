@@ -3,6 +3,9 @@ import { Button, Image, List, Row, Col, Divider, Typography, Modal } from 'antd'
 import './Gallery.css';
 import Label from './Label.js';
 import LazyLoad from 'react-lazyload';
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
+
 
 const { Title } = Typography;
 
@@ -78,24 +81,6 @@ class Gallery extends React.Component {
         curr_playlist: data
       }, this.calcPlaylistAudioFeatures);
     });
-
-    console.log("u talking crazy with that " + access_token);
-
-    // const individualTracksUrl = {
-    //   url: `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`,
-    //   headers: { 'Authorization': `Bearer ${access_token}` },
-    //   json: true
-    // }
-
-    // console.log("aklfjsdlkfj");
-    // fetch(individualTracksUrl).then(response => response.json())
-    // .then(data => console.log(data));
-
-
-    // this.setState({
-    //   visible: true,
-    //   curr_playlist: playlist,
-    // });
   };
 
   async calcPlaylistAudioFeatures() {
@@ -125,31 +110,6 @@ class Gallery extends React.Component {
       //audio_features = data.audio_features;
     });
 
-
-    // console.log("yee")
-    // console.log(audio_features)
-    // var num_valid_songs, danceability_sum, energy_sum, loudness_sum, valence_sum, tempo_sum, duration;
-    // num_valid_songs = danceability_sum = energy_sum = loudness_sum = valence_sum = tempo_sum = duration = 0;
-    // console.log(duration)
-    // audio_features.map((song) => {
-    //   // make sure it's not null
-    //   if (song) {
-    //     num_valid_songs += 1;
-    //     danceability_sum += song.danceability;
-    //     energy_sum += song.energy;
-    //     loudness_sum += song.loudness;
-    //     valence_sum += song.valence;
-    //     tempo_sum += song.tempo;
-    //     duration += song.duration;
-    //   }
-    // });
-    // console.log(duration)
-
-
-    // // convert duration from milliseconds to hours mins
-    // const minutes = Math.floor((duration / (1000 * 60)) % 60);
-    // const hours   = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
   }
 
   handleOk = e => {
@@ -163,6 +123,14 @@ class Gallery extends React.Component {
       visible: false,
     });
   };
+
+  handleDownload = e => {
+    e.preventDefault();
+    domtoimage.toBlob(document.getElementsByClassName('label')[0])
+    .then(function (blob) {
+        saveAs(blob, 'mu-nutrifact-label.png');
+    });
+  }
 
   render() {
     const size = 3;
@@ -200,11 +168,11 @@ class Gallery extends React.Component {
           visible={this.state.visible}
           onCancel={this.handleCancel}
           footer={[
-            <Button key="1">Download label</Button>,
+            <Button key="1" onClick={this.handleDownload}>Download Label as PNG</Button>,
             <Button key="2" type="primary" onClick={this.handleOk}>Close</Button>
           ]}
         >          
-          <Label playlist={this.state.curr_playlist} audio_features={this.state.audio_features} spotifyApi={this.props}/>
+          <Label id="label" playlist={this.state.curr_playlist} audio_features={this.state.audio_features} spotifyApi={this.props}/>
         </Modal>
       </div>
     );    
