@@ -32,7 +32,7 @@ class App extends React.Component {
     var access_token = params.access_token;
     spotifyApi.setAccessToken(access_token);
 
-    const redirect_loc = 'https://music-nutrifacts-server.herokuapp.com/login';
+    const redirect_loc = window.location.href.includes('localhost') ? 'http://localhost:8888/login' : 'https://music-nutrifacts-server.herokuapp.com/login';
     const connectSpotify = access_token ? (
       <Gallery spotifyApi={spotifyApi} />
     ) : (
@@ -50,8 +50,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// {
-//   window.location = window.location.href.includes('localhost') 
-//     ? 'http://localhost:8888/login' 
-//     : 'https://better-playlists-backend.herokuapp.com/login' }

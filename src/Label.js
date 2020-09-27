@@ -17,10 +17,15 @@ class Label extends React.Component {
 
   render () {
     const { playlist, audio_features } = this.props;
+    console.log("reached, setting background");
     var new_background_img = null;
     if (playlist.images) {
+      console.log("successfully set - got it");
       new_background_img = playlist.images[0].url;
+      console.log(new_background_img);
     }
+
+    console.log("calculating stats now!")
 
     var num_valid_songs, danceability_sum, energy_sum, loudness_sum, valence_sum, tempo_sum, duration;
     num_valid_songs = danceability_sum = energy_sum = loudness_sum = valence_sum = tempo_sum = duration = 0;    
@@ -82,7 +87,7 @@ class Label extends React.Component {
             <div className="modal-background" style={{backgroundImage: 'url(' + new_background_img + ')', filter: 'url(' + new_background_img + ')'}}>
             </div>
           ) : (
-            <div className="modal-background" style={{backgroundColor: "gray", width: 100%""}}></div>
+            <div className="modal-background" style={{backgroundColor: "gray", width: "100%"}}></div>
           )
         }
         <div className="label" >
