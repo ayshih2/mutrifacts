@@ -134,7 +134,8 @@ class Gallery extends React.Component {
     }, []);   
 
     const logout_loc = window.location.href.includes('localhost') ? 'http://localhost:8888/logout' : 'https://music-nutrifacts-server.herokuapp.com/logout';
-    
+
+
     return (
       <div className="main">
         <Button className="logout-bttn" shape="round" style={{float: "right"}} href={logout_loc}>log out</Button>
@@ -163,8 +164,8 @@ class Gallery extends React.Component {
           visible={this.state.visible}
           onCancel={this.handleCancel}
           footer={[
-          <Button key="1" icon={<DownloadOutlined />} onClick={this.handlePNGDownload}>Transparent</Button>,
-          <Button key="1" icon={<DownloadOutlined />} onClick={this.handleBGDownload}>Background Included</Button>,
+            <Button key="1" icon={<DownloadOutlined />} onClick={this.handlePNGDownload}>Transparent</Button>,
+            <Button key="1" icon={<DownloadOutlined />} onClick={this.handleBGDownload}>As Seen</Button>,
             <Button key="2" type="primary" onClick={this.handleOk}>Close</Button>
           ]}
         >          
