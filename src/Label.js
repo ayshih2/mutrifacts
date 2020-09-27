@@ -84,7 +84,7 @@ class Label extends React.Component {
       <div className="parent-div" >
         {
           (new_background_img) ? (
-            <div className="modal-background" style={{backgroundImage: 'url(' + new_background_img + ')', filter: 'url(' + new_background_img + ')'}}>
+            <div className="modal-background" style={{backgroundImage: 'url(' + new_background_img + ')'}}>
             </div>
           ) : (
             <div className="modal-background" style={{backgroundColor: "gray", width: "100%"}}></div>
