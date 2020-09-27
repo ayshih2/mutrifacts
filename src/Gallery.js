@@ -131,10 +131,12 @@ class Gallery extends React.Component {
       }
       return acc;
     }, []);   
+
+    const logout_loc = window.location.href.includes('localhost') ? 'http://localhost:8888/logout' : 'https://music-nutrifacts-server.herokuapp.com/logout';
     
     return (
       <div className="main">
-        <Button className="logout-bttn" shape="round" style={{float: "right"}} href={'http://localhost:8888/logout'}>log out</Button>
+        <Button className="logout-bttn" shape="round" style={{float: "right"}} href={logout_loc}>log out</Button>
         <Typography.Text className="instruction">choose a playlist to see its nutritional value.</Typography.Text>
           {
             res.map((row_data, i) => {
