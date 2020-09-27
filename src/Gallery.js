@@ -138,6 +138,7 @@ class Gallery extends React.Component {
     
     return (
       <div className="main">
+        <Button className="logout-bttn" shape="round" style={{float: "right"}}>Log out</Button>
         <Typography.Text className="instruction">choose a playlist to see its nutritional value.</Typography.Text>
           {
             res.map((row_data, i) => {

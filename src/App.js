@@ -36,11 +36,11 @@ class App extends React.Component {
     const connectSpotify = access_token ? (
       <Gallery spotifyApi={spotifyApi} />
     ) : (
-      <div style={{display: "table", width: "100vw", height: "100vh"}}>
+      <div style={{display: "table", width: "100%", height: "100vh"}}>
         <div style={{display: "table-cell", verticalAlign: "middle"}}>
         <Typography.Title className="title">Mu<span className="title-parts-format">sic </span>Nutri<span className="title-parts-format">tion</span> <span>Facts</span></Typography.Title>
-        <Divider plain>See your playlists' audio features in the form of nutrition labels.</Divider>
-        <Button href={redirect_loc}>Log in with Spotify</Button></div>
+        <p className="description-mobile" style={{width: "80%", padding: "0 10px", marginRight: "auto", marginLeft: "auto"}}>See your playlists' audio features in the form of nutrition labels.</p>
+        <Button shape="round" href={redirect_loc}>Log in with Spotify</Button></div>
       </div>
     );
 
