@@ -1,6 +1,6 @@
 import React from 'react';
 import Gallery from './Gallery.js'
-import { Button } from 'antd';
+import { Button, Typography, Divider } from 'antd';
 import './App.css';
 
 class App extends React.Component {
@@ -36,8 +36,11 @@ class App extends React.Component {
     const connectSpotify = access_token ? (
       <Gallery spotifyApi={spotifyApi} />
     ) : (
-      <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100vh"}}>
-        <Button href={redirect_loc}>Log in</Button>
+      <div style={{display: "table", width: "100vw", height: "100vh"}}>
+        <div style={{display: "table-cell", verticalAlign: "middle"}}>
+        <Typography.Title className="title">Mu<span className="title-parts-format">sic </span>Nutri<span className="title-parts-format">tion</span> <span>Facts</span></Typography.Title>
+        <Divider plain>See your playlists' audio features in the form of nutrition labels.</Divider>
+        <Button href={redirect_loc}>Log in with Spotify</Button></div>
       </div>
     );
 

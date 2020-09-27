@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.title {
+  font-style: italic;
+  text-shadow: 2px 2px lightgray;
+}
+
+.title-parts-format {
+  color: gray;
+}

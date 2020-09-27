@@ -10,11 +10,60 @@ body {
 
 @media only screen and (max-device-width: 480px) {
     .main {
-        width: 90%;
-        margin: 5em auto auto auto;
+      width: 90%;
+      margin: 5em auto auto auto;
     }
 
     .instruction {
-        font-size: xx-large !important;
-    }    
+      font-size: xx-large !important;
+    }  
+
+    .playlist-name {
+      font-size: calc(12px + 1vw);
+      font-weight: bold;
+    }
+}
+
+.playlist > .ant-image > .ant-image-img {
+    border-radius: 10px;
+    transition: 0.3s;
+    padding-bottom: 2px;
+}
+
+.playlist > .ant-image > .ant-image-img:hover {
+    border-radius: 10px;
+    opacity: 1.0;
+}
+
+.playlist {
+    transition: transform 0.3s;
+    opacity: 0.7;
+}
+
+.playlist:hover{
+    transform: scale(1.02);
+    opacity: 1;
+}
+
+.ard-container {
+    position: relative;
+}
+
+.playlist-name {
+    font-size: 1vmax;
+    font-weight: bold;
+}
+
+.ant-row {
+  padding: 0 0 1vw 0;
+}
+
+.instruction {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 3vw;
+  color: white;
+  text-shadow: 2px 2px lightgray;
+  float: left;
+  padding-bottom: 10px;
 }

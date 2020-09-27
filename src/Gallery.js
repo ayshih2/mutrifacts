@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Image, Row, Col, Typography, Modal } from 'antd';
+import { Card, Divider, Button, Image, Row, Col, Typography, Modal } from 'antd';
 import './Gallery.css';
 import Label from './Label.js';
 import domtoimage from 'dom-to-image-chrome-fix-retina';
@@ -125,7 +125,8 @@ class Gallery extends React.Component {
   }
 
   render() {
-    const size = 3;
+    // four items per row
+    const size = 4;
     var split_playlist = [...this.state.playlists];
     const res = split_playlist.reduce((acc, curr, i) => {
       if ( !(i % size)  ) {   
@@ -137,16 +138,18 @@ class Gallery extends React.Component {
     
     return (
       <div className="main">
-        <Title className="instruction">❥ choose a playlist to see its nutritional value.</Title>
+        <Typography.Text className="instruction">choose a playlist to see its nutritional value.</Typography.Text>
           {
             res.map((row_data, i) => {
               return (
-                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} style={{padding: "0.5em"}} key={"r" + i}>
+                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} key={"r" + i}>
                   {row_data.map((col_data, j) => {
                     return (
-                      <Col span={8} key={"c" + j}>
-                        <Image preview={false} src={col_data.images[0].url} onClick={() => this.showModal(col_data)}/>
-                        <Title level={4}>{col_data.name}</Title>
+                      <Col xs={12} s={12} md={6} lg={6} key={"c" + j}>
+                        <div className="playlist">
+                          <Image preview={false} src={col_data.images[0].url} onClick={() => this.showModal(col_data)}/>
+                          <Typography.Text className="playlist-name">{col_data.name}</Typography.Text>
+                        </div>
                       </Col>
                     )
                   })}
@@ -173,3 +176,6 @@ class Gallery extends React.Component {
 }
 
 export default Gallery;
+
+{/* <Image style={{borderRadius: "50%"}} loading="lazy" preview={false} src={col_data.images[0].url} onClick={() => this.showModal(col_data)}/>
+<Title level={4}>{col_data.name}</Title> */}
