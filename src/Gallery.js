@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Image, Row, Col, Typography, Modal } from 'antd';
 import './Gallery.css';
 import Label from './Label.js';
-import domtoimage from 'dom-to-image';
+import domtoimage from 'dom-to-image-chrome-fix-retina';
 import { saveAs } from 'file-saver';
 
 
@@ -106,9 +106,19 @@ class Gallery extends React.Component {
     });
   };
 
-  handleDownload = e => {
+  handlePNGDownload = e => {
     e.preventDefault();
-    domtoimage.toBlob(document.getElementsByClassName('label')[0])
+    domtoimage.toBlob(document.getElementsByClassName('label')[0], {bgcolor: "gray"})
+    .then(function (blob) {
+        saveAs(blob, 'mu-nutrifact-label.png');
+    });
+  }
+
+  handleBGDownload = e => {
+    e.preventDefault();
+    const node = document.getElementsByClassName('parent-div')[0];
+
+    domtoimage.toBlob(node, {bgcolor: "white"})
     .then(function (blob) {
         saveAs(blob, 'mu-nutrifact-label.png');
     });
@@ -150,7 +160,8 @@ class Gallery extends React.Component {
           visible={this.state.visible}
           onCancel={this.handleCancel}
           footer={[
-            <Button key="1" onClick={this.handleDownload}>Download Label as PNG</Button>,
+            <Button key="1" onClick={this.handlePNGDownload}>Download as PNG</Button>,
+            <Button key="1" onClick={this.handleBGDownload}>Download With Background</Button>,
             <Button key="2" type="primary" onClick={this.handleOk}>Close</Button>
           ]}
         >          
