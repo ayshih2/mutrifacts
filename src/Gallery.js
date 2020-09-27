@@ -1,13 +1,9 @@
 import React from 'react';
-import { Card, Divider, Button, Image, Row, Col, Typography, Modal } from 'antd';
+import { Button, Image, Row, Col, Typography, Modal } from 'antd';
 import './Gallery.css';
 import Label from './Label.js';
 import domtoimage from 'dom-to-image-chrome-fix-retina';
 import { saveAs } from 'file-saver';
-
-
-const { Title } = Typography;
-
 
 class Gallery extends React.Component { 
 
@@ -138,7 +134,7 @@ class Gallery extends React.Component {
     
     return (
       <div className="main">
-        <Button className="logout-bttn" shape="round" style={{float: "right"}}>Log out</Button>
+        <Button className="logout-bttn" shape="round" style={{float: "right"}} href={'http://localhost:8888/logout'}>log out</Button>
         <Typography.Text className="instruction">choose a playlist to see its nutritional value.</Typography.Text>
           {
             res.map((row_data, i) => {
@@ -177,6 +173,3 @@ class Gallery extends React.Component {
 }
 
 export default Gallery;
-
-{/* <Image style={{borderRadius: "50%"}} loading="lazy" preview={false} src={col_data.images[0].url} onClick={() => this.showModal(col_data)}/>
-<Title level={4}>{col_data.name}</Title> */}
