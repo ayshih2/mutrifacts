@@ -18,19 +18,6 @@
   background-repeat: repeat;
 }
 
-.bg {
-  
-  position: absolute;
-  opacity: 40%;
-  background-repeat: repeat;
-  width: 100%;
-  max-width: 90%;
-  left: 0;
-  right: 0;
-  margin: auto;
-  border: 4px solid blueviolet;
-}
-
 body {
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
