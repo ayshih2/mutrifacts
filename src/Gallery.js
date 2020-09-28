@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, Image, Row, Col, Typography, Modal } from 'antd';
+import { Button, Image, Row, Col, Typography, Modal, Spin, Skeleton } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import './Gallery.css';
 import Label from './Label.js';
 import domtoimage from 'dom-to-image-chrome-fix-retina';
 import { saveAs } from 'file-saver';
+import LazyLoad from 'react-lazyload';
 
 class Gallery extends React.Component { 
 
@@ -16,6 +17,7 @@ class Gallery extends React.Component {
       curr_playlist: null,
       audio_features: [],
       visible: false,
+      data_loaded: false,
     };
   }
 
@@ -124,7 +126,8 @@ class Gallery extends React.Component {
     
     this.setState({
       audio_features: audio_features,
-      popularity: (popularity_sum / audio_features.length)
+      popularity: (popularity_sum / audio_features.length),
+      data_loaded: true
     });
   }
 
@@ -134,6 +137,7 @@ class Gallery extends React.Component {
   handleOk = e => {
     this.setState({
       visible: false,
+      data_loaded: false
     });
   };
 
@@ -143,6 +147,7 @@ class Gallery extends React.Component {
   handleCancel = e => {
     this.setState({
       visible: false,
+      data_loaded: false
     });
   };
 
@@ -196,7 +201,9 @@ class Gallery extends React.Component {
                   return (
                     <Col xs={12} s={12} md={6} lg={6} key={"c" + j}>
                       <div className="playlist">
-                        <Image preview={false} src={col_data.images[0].url} onClick={() => this.showModal(col_data)}/>
+                        <LazyLoad once>
+                          <Image preview={false} src={col_data.images[0].url} onClick={() => this.showModal(col_data)}/>
+                        </LazyLoad>
                         <Typography.Text className="playlist-name">{col_data.name}</Typography.Text>
                       </div>
                     </Col>
@@ -211,12 +218,16 @@ class Gallery extends React.Component {
           visible={this.state.visible}
           onCancel={this.handleCancel}
           footer={[
-            <Button key="1" icon={<DownloadOutlined />} onClick={this.handlePNGDownload}>Transparent</Button>,
+            <Button key="1" icon={<DownloadOutlined />} onClick={this.handlePNGDownload}>White Background</Button>,
             <Button key="2" type="primary" onClick={this.handleOk}>Close</Button>
           ]}
-        >          
-          <Label id="label" playlist={this.state.curr_playlist} audio_features={this.state.audio_features} 
-          popularity={this.state.popularity} spotifyApi={this.props}/>
+        >     
+        {
+          (this.state.data_loaded) 
+          ? (<Label id="label" playlist={this.state.curr_playlist} audio_features={this.state.audio_features} 
+          popularity={this.state.popularity} spotifyApi={this.props}/>)
+          : (<Skeleton active />)
+        }     
         </Modal>
       </div>
     );    
