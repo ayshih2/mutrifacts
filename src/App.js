@@ -32,7 +32,7 @@ class App extends React.Component {
     var access_token = params.access_token;
     spotifyApi.setAccessToken(access_token);
 
-    const redirect_loc = window.location.href.includes('localhost') ? 'http://localhost:8888/login' : 'https://music-nutrifacts-server.herokuapp.com/login';
+    const redirect_loc = window.location.href.includes('localhost') ? process.env.REACT_APP_LOCAL_LOGIN_URI : process.env.REACT_APP_LOGIN_URI;
     const connectSpotify = access_token ? (
       <Gallery spotifyApi={spotifyApi} />
     ) : (
