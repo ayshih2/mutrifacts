@@ -48,32 +48,32 @@ class Label extends React.Component {
     const playlistDetails = [
       {
         id: 'Popularity',
-        value: Math.round(popularity),
-        description: 'Out of 100 and based on the total number of plays a track has had and how recent those plays are.'
+        value: `${Math.round(popularity)}%`,
+        description: 'Based on the total number of plays tracks have had and how recent those plays are.'
       },
       {
         id: 'Danceability',
-        value: (danceabilitySum / numValidSongs).toFixed(2), 
-        description: 'Describes how suitable a track is for dancing based on a ' + 
-        'combination of musical elements like tempo and rhythm stability. A value of 0.0 is ' +
-        'least danceable while 1.0 is most danceable.'
+        value: `${(danceabilitySum / numValidSongs).toFixed(2) * 100}%`, 
+        description: 'Describes how suitable tracks are for dancing based on a ' + 
+        'combination of musical elements like tempo and rhythm stability. A higher value means ' +
+        'it\'s more danceable'
       },
       {
         id: 'Energy',
-        value: (energySum / numValidSongs).toFixed(2),
-        description: 'A measure from 0.0 to 1.0 that represents a perpetual ' + 
-        'measure of intensity and activity. A higher value typically means a more energy track (i.e. sounds faster and noisier).'
+        value: `${(energySum / numValidSongs).toFixed(2) * 100}%`,
+        description: 'Represents a perpetual ' + 
+        'measure of intensity and activity. A higher value typically means more energetic tracks (i.e. sounds faster and noisier).'
       },
       {
         id: 'Valence',
-        value: (valenceSum / numValidSongs).toFixed(2),
-        description: 'Describes the musical positiveness conveyed by a track (from 0.0 to 1.0). ' +
+        value: `${(valenceSum / numValidSongs).toFixed(2) * 100}%`,
+        description: 'Describes the musical positiveness of a playlist. ' +
         'Tracks with a higher valence sound more positive (i.e. happy).'
       },
       {
         id: 'Loudness',
         value: (loudnessSum / numValidSongs).toFixed(2) + ' db',
-        description: 'Describes the overall loudness averaged across a track. Values typically range from -60 to 0 db.'
+        description: 'Describes the overall loudness averaged across the tracks. Values typically range from -60 to 0 db.'
       },
       {
         id: 'Tempo',
