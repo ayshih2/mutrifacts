@@ -19,6 +19,12 @@
   background-repeat: repeat;
 }
 
+.creation-info {
+  line-height: 1;
+  font-size: medium;
+  word-break: break-word;
+}
+
 body {
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
@@ -26,8 +32,6 @@ body {
 .playlist-gen-info {
   text-align: left;
   border-bottom: 7px black solid;
-  /* line-height: 30%; */
-  /*padding-bottom: 10px;*/
   margin-top: -7px;
 }
 
@@ -71,6 +75,28 @@ body {
 
 .extra-info {
   border-bottom: 3px solid black;
+}
+
+.ant-list-item {
+  line-height: 3px;
+}
+
+.breakdown-header {
+  font-weight: 500;
+  line-height: 3px;
+  float: right;
+}
+
+.breakdown-type {
+  font-weight: 500;
+  float: left;
+}
+
+.breakdown-description {
+  text-align: left;
+  float: left;
+  font-size: x-small;
+  padding-right: 10%;
 }
 
 .label > .breakdown > .ant-list-split > .ant-list-header {

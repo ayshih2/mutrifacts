@@ -1,6 +1,5 @@
 import React from 'react';
 import './Label.css';
-import './App.css';
 import { List, Typography } from 'antd';
 const { Title } = Typography;
 
@@ -11,32 +10,32 @@ class Label extends React.Component {
     this.state = {
       playlist: this.props.playlist,
       spotifyApi: this.props.spotifyApi,
-      audio_features: this.props.audio_features,
+      audioFeatures: this.props.audioFeatures,
       popularity: this.props.popularity
     };
   }
 
   render () {
-    const { playlist, audio_features, popularity } = this.props;
+    const { playlist, audioFeatures, popularity } = this.props;
 
     // get playlist background image 
-    var new_background_img = null;
+    var newBackgroundImg = null;
     if (playlist.images) {
-      new_background_img = playlist.images[0].url;
+      newBackgroundImg = playlist.images[0].url;
     }
 
     // calculate averages of all collected audio features
-    var num_valid_songs, danceability_sum, energy_sum, loudness_sum, valence_sum, tempo_sum, duration;
-    num_valid_songs = danceability_sum = energy_sum = loudness_sum = valence_sum = tempo_sum = duration = 0;    
-    audio_features.forEach((song) => {
+    var numValidSongs, danceabilitySum, energySum, loudnessSum, valenceSum, tempoSum, duration;
+    numValidSongs = danceabilitySum = energySum = loudnessSum = valenceSum = tempoSum = duration = 0;    
+    audioFeatures.forEach((song) => {
       // make sure it's not null
       if (song) {
-        num_valid_songs += 1;
-        danceability_sum += song.danceability;
-        energy_sum += song.energy;
-        loudness_sum += song.loudness;
-        valence_sum += song.valence;
-        tempo_sum += song.tempo;
+        numValidSongs += 1;
+        danceabilitySum += song.danceability;
+        energySum += song.energy;
+        loudnessSum += song.loudness;
+        valenceSum += song.valence;
+        tempoSum += song.tempo;
         duration += song.duration_ms;
       }
     });
@@ -46,45 +45,45 @@ class Label extends React.Component {
     const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
     // for main body of nutrition label
-    const playlist_details = [
+    const playlistDetails = [
       {
         id: 'Popularity',
         value: Math.round(popularity),
-        description: "Out of 100 and based on the total number of plays a track has had and how recent those plays are."
+        description: 'Out of 100 and based on the total number of plays a track has had and how recent those plays are.'
       },
       {
         id: 'Danceability',
-        value: (danceability_sum / num_valid_songs).toFixed(2), 
-        description: "Describes how suitable a track is for dancing based on a " + 
-        "combination of musical elements like tempo and rhythm stability. A value of 0.0 is " +
-        "least danceable while 1.0 is most danceable."
+        value: (danceabilitySum / numValidSongs).toFixed(2), 
+        description: 'Describes how suitable a track is for dancing based on a ' + 
+        'combination of musical elements like tempo and rhythm stability. A value of 0.0 is ' +
+        'least danceable while 1.0 is most danceable.'
       },
       {
         id: 'Energy',
-        value: (energy_sum / num_valid_songs).toFixed(2),
-        description: "A measure from 0.0 to 1.0 that represents a perpetual " + 
-        "measure of intensity and activity. A higher value typically means a more energy track (i.e. sounds faster and noisier)."
+        value: (energySum / numValidSongs).toFixed(2),
+        description: 'A measure from 0.0 to 1.0 that represents a perpetual ' + 
+        'measure of intensity and activity. A higher value typically means a more energy track (i.e. sounds faster and noisier).'
       },
       {
         id: 'Valence',
-        value: (valence_sum / num_valid_songs).toFixed(2),
-        description: "Describes the musical positiveness conveyed by a track (from 0.0 to 1.0). " +
-        "Tracks with a higher valence sound more positive (i.e. happy)."
+        value: (valenceSum / numValidSongs).toFixed(2),
+        description: 'Describes the musical positiveness conveyed by a track (from 0.0 to 1.0). ' +
+        'Tracks with a higher valence sound more positive (i.e. happy).'
       },
       {
         id: 'Loudness',
-        value: (loudness_sum / num_valid_songs).toFixed(2) + " db",
-        description: "Describes the overall loudness averaged across a track. Values typically range from -60 to 0 db."
+        value: (loudnessSum / numValidSongs).toFixed(2) + ' db',
+        description: 'Describes the overall loudness averaged across a track. Values typically range from -60 to 0 db.'
       },
       {
         id: 'Tempo',
-        value: Math.floor(tempo_sum / num_valid_songs) + " BPM",
-        description: ""
+        value: Math.floor(tempoSum / numValidSongs) + ' BPM',
+        description: ''
       }
     ];
 
     // for footer of nutrition label
-    const footer_data = [
+    const footerData = [
       {
         id: 'Followers',
         value: (playlist.followers !== undefined) ? playlist.followers.total : 0
@@ -94,13 +93,14 @@ class Label extends React.Component {
         value: (playlist.public) ? 'Public' : 'Private' 
       }
     ];
-    const playlist_by_str = playlist.name + " by " + playlist.owner.display_name;
+    
+    const playlistCreationDetails = playlist.name + " by " + playlist.owner.display_name;
 
     return (
       <div className="parent-div">
         {
-          (new_background_img) ? (
-            <div className="modal-background" style={{backgroundImage: `url(${new_background_img})`}}>
+          (newBackgroundImg) ? (
+            <div className="modal-background" style={{backgroundImage: `url(${newBackgroundImg})`}}>
             </div>
           ) : (
             <div className="modal-background" style={{backgroundColor: "white", width: "100%"}}></div>
@@ -109,7 +109,7 @@ class Label extends React.Component {
         <div className="label">
           <Title>Nutrition Facts</Title>
           <div className="playlist-gen-info">
-            <div style={{lineHeight: "1", fontSize: "medium", wordBreak: "break-word"}}>{playlist_by_str}</div>
+            <div className="creation-info">{playlistCreationDetails}</div>
             <div className="runtime">
               <span>Runtime</span>
               <span style={{float: "right"}}>{(hours > 0) ? (hours + ' hrs') : ''} {minutes} mins</span>
@@ -124,13 +124,13 @@ class Label extends React.Component {
           </div>
           <div className="breakdown">
             <List
-              dataSource={playlist_details}
-              header={<div style={{fontWeight: "500", lineHeight: "3px", float: "right"}}>Audio Feature Averages*</div>}
+              dataSource={playlistDetails}
+              header={<div className="breakdown-header">Audio Feature Averages*</div>}
               renderItem={(item) => 
-                <List.Item style={{lineHeight: "3px"}}>
+                <List.Item>
                   <List.Item.Meta
-                    title={<span style={{fontWeight: "500", float: "left"}}>{item.id}</span>}
-                    description= {<span style={{textAlign: "left", float: "left", fontSize: "x-small", paddingRight: "10%"}}>{item.description}</span>}
+                    title={<span className="breakdown-type">{item.id}</span>}
+                    description= {<span className="breakdown-description">{item.description}</span>}
                   />
                   <div>{item.value}</div>
                 </List.Item>}
@@ -138,9 +138,9 @@ class Label extends React.Component {
           </div>
           <div className="extra-info">
             <List
-              dataSource={footer_data}
+              dataSource={footerData}
               renderItem={(item) => 
-                <List.Item style={{lineHeight: "3px"}}>
+                <List.Item>
                   <span style={{float: "left"}}>{item.id}</span>
                   <span style={{float: "right"}}>{item.value}</span>
                 </List.Item>

@@ -1,6 +1,6 @@
 import React from 'react';
-import Gallery from './Gallery.js'
-import { Button, Typography, Divider } from 'antd';
+import Gallery from './components/Gallery.js'
+import { Button, Typography } from 'antd';
 import './App.css';
 
 class App extends React.Component {
@@ -30,19 +30,19 @@ class App extends React.Component {
     const connectSpotify = access_token ? (
       <Gallery spotifyApi={spotifyApi} />
     ) : (
-      <div style={{display: "table", width: "100%", height: "100vh"}}>
-        <div style={{display: "table-cell", verticalAlign: "middle"}}>
+      <div className="wrapper">
+        <div className="content">
         <Typography.Title className="title">
           MutriFacts
         </Typography.Title>
-        <Typography.Title level={5} style={{fontStyle: "italic", marginTop: "-20px"}}>
+        <Typography.Title level={5} className="sub-title">
           (Mu
-          <span className="title-parts-format">sic Nu</span>
+          <span className="sub-title-parts">sic Nu</span>
           tri
-          <span className="title-parts-format">tion </span>
+          <span className="sub-title-parts">tion </span>
           Facts)
         </Typography.Title>
-        <p className="description-mobile" style={{width: "80%", padding: "0 10px", marginRight: "auto", marginLeft: "auto"}}>See your playlists' audio features in the form of nutrition labels.</p>
+        <p className="description-mobile">See your playlists' audio features in the form of nutrition labels.</p>
         <Button shape="round" href={redirect_loc}>Log in with Spotify</Button></div>
       </div>
     );

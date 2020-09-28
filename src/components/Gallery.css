@@ -9,6 +9,10 @@ body {
     text-align: center;
 }
 
+.logout-bttn {
+  float: right;
+}
+
 .playlist > .lazyload-wrapper > .ant-image > .ant-image-img {
     border-radius: 5px;
     transition: 0.3s;
