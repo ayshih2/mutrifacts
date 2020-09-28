@@ -53,20 +53,20 @@ class Label extends React.Component {
       },
       {
         id: 'Danceability',
-        value: `${(danceabilitySum / numValidSongs).toFixed(2) * 100}%`, 
+        value: `${(danceabilitySum / numValidSongs * 100).toFixed(2)}%`, 
         description: 'Describes how suitable tracks are for dancing based on a ' + 
         'combination of musical elements like tempo and rhythm stability. A higher value means ' +
         'it\'s more danceable'
       },
       {
         id: 'Energy',
-        value: `${(energySum / numValidSongs).toFixed(2) * 100}%`,
+        value: `${(energySum / numValidSongs * 100).toFixed(2)}%`,
         description: 'Represents a perpetual ' + 
         'measure of intensity and activity. A higher value typically means more energetic tracks (i.e. sounds faster and noisier).'
       },
       {
         id: 'Valence',
-        value: `${(valenceSum / numValidSongs).toFixed(2) * 100}%`,
+        value: `${(valenceSum / numValidSongs * 100).toFixed(2)}%`,
         description: 'Describes the musical positiveness of a playlist. ' +
         'Tracks with a higher valence sound more positive (i.e. happy).'
       },
