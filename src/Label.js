@@ -94,25 +94,22 @@ class Label extends React.Component {
         value: (playlist.public) ? 'Public' : 'Private' 
       }
     ];
-
-    // prevent playlist name from overflowing by truncating it if it's too long
     const playlist_by_str = playlist.name + " by " + playlist.owner.display_name;
-    const formatted_playlist_by_str = (playlist_by_str.length < 55) ? playlist_by_str : (playlist_by_str.substring(0, 54) + "...")
 
     return (
-      <div className="parent-div" >
+      <div className="parent-div">
         {
           (new_background_img) ? (
             <div className="modal-background" style={{backgroundImage: `url(${new_background_img})`}}>
             </div>
           ) : (
-            <div className="modal-background" style={{backgroundColor: "gray", width: "100%"}}></div>
+            <div className="modal-background" style={{backgroundColor: "white", width: "100%"}}></div>
           )
         }
-        <div className="label" >
+        <div className="label">
           <Title>Nutrition Facts</Title>
           <div className="playlist-gen-info">
-            <p style={{fontSize: "medium"}}>{formatted_playlist_by_str}</p>
+            <div style={{lineHeight: "1", fontSize: "medium", wordBreak: "break-word"}}>{playlist_by_str}</div>
             <div className="runtime">
               <span>Runtime</span>
               <span style={{float: "right"}}>{(hours > 0) ? (hours + ' hrs') : ''} {minutes} mins</span>

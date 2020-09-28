@@ -154,13 +154,18 @@ class Gallery extends React.Component {
   /*
    * Functionality for download button. Will download nutrition label with white background.
    */
-  handlePNGDownload = e => {
-    e.preventDefault();
-    domtoimage.toBlob(document.getElementsByClassName('label')[0], {bgcolor: "white"})
+  async handlePNGDownload() {
+    // remove background of playlist album art first
+    document.getElementsByClassName('modal-background')[0].style.display = "none";
+    await domtoimage.toBlob(document.getElementsByClassName('parent-div')[0], {bgcolor: "white"})
     .then(function (blob) {
         saveAs(blob, 'mu-nutrifact-label.png');
     });
+    // revert to original
+    document.getElementsByClassName('modal-background')[0].style.display = "block";
   }
+
+  //style: {margin: "0px", padding: "100px", border: "0", outline: "none"}
 
   /*
    * Download PNG with album cover background (as seen). Not in use.
