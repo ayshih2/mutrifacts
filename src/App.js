@@ -4,12 +4,6 @@ import { Button, Typography, Divider } from 'antd';
 import './App.css';
 
 class App extends React.Component {
-  
-  constructor(){
-    super();
-    const params = this.getHashParams();
-    console.log(params);
-  }
 
   getHashParams() {
     var hashParams = {};
@@ -38,7 +32,16 @@ class App extends React.Component {
     ) : (
       <div style={{display: "table", width: "100%", height: "100vh"}}>
         <div style={{display: "table-cell", verticalAlign: "middle"}}>
-        <Typography.Title className="title">Mu<span className="title-parts-format">sic </span>Nutri<span className="title-parts-format">tion</span> <span>Facts</span></Typography.Title>
+        <Typography.Title className="title">
+          MutriFacts
+        </Typography.Title>
+        <Typography.Title level={5} style={{fontStyle: "italic", marginTop: "-20px"}}>
+          (Mu
+          <span className="title-parts-format">sic Nu</span>
+          tri
+          <span className="title-parts-format">tion </span>
+          Facts)
+        </Typography.Title>
         <p className="description-mobile" style={{width: "80%", padding: "0 10px", marginRight: "auto", marginLeft: "auto"}}>See your playlists' audio features in the form of nutrition labels.</p>
         <Button shape="round" href={redirect_loc}>Log in with Spotify</Button></div>
       </div>

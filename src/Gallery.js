@@ -11,7 +11,6 @@ class Gallery extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       playlists: [],
       curr_playlist: null,
@@ -42,7 +41,6 @@ class Gallery extends React.Component {
         return data.body;
       // eslint-disable-next-line no-loop-func
       }).then((data) => {
-        console.log("reached");
         playlists = [...playlists, ...data.items];
         offset += data.items.length;
         num_retreived = data.items.length;
@@ -106,7 +104,6 @@ class Gallery extends React.Component {
         // get list of valid track ids (i.e. aren't local songs in spotify)
         (data.body.items).forEach((track_obj) => {
           if (track_obj.track && track_obj.track.id) {
-            console.log(track_obj.track)
             popularity_sum += track_obj.track.popularity;
             valid_songs.push(track_obj.track.id);
           }
@@ -164,8 +161,6 @@ class Gallery extends React.Component {
     // revert to original
     document.getElementsByClassName('modal-background')[0].style.display = "block";
   }
-
-  //style: {margin: "0px", padding: "100px", border: "0", outline: "none"}
 
   /*
    * Download PNG with album cover background (as seen). Not in use.
