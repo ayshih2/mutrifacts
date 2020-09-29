@@ -19,17 +19,17 @@ As specified in Spotify's Web API documentation, when the user logs in, they mus
 Clone this repository. You will need `node` and `npm` installed globally on your machine. Must also create/register the app in your Spotify Developer account to get a Client ID and secret. Before you run the following commands, you'll have to go to the code and make sure you set the proper environment variables for the following:
 
 *For server.js:*
-`CLIENT_ID`
-`CLIENT_SECRET`
-`REDIRECT_URI`
+`CLIENT_ID`,
+`CLIENT_SECRET`,
+`REDIRECT_URI`,
 `FRONTEND_URI`
 
 *For App.js:*
-`REACT_APP_LOGIN_URI
-REACT_APP_LOCAL_LOGIN_URI`
+`REACT_APP_LOGIN_URI`,
+`REACT_APP_LOCAL_LOGIN_URI`
 
 *For Gallery.js:*
-`REACT_APP_LOGOUT_URI`
+`REACT_APP_LOGOUT_URI`,
 `REACT_APP_LOCAL_LOGOUT_URI`
 
 
