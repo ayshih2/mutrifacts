@@ -12,7 +12,7 @@ As specified in Spotify's Web API documentation, when the user logs in, they mus
 ## Screenshots
 
 #### Example:   
-<img src="https://github.com/ayshih2/mutrifacts/master/nutrition-label-example.jpg" width="400" alt="label example screenshot">
+<img src="https://github.com/ayshih2/mutrifacts/blob/master/nutrition-label-example.png" width="400" alt="label example screenshot">
 
 ## How to Run
 ### Setup
