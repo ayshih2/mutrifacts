@@ -154,7 +154,7 @@ class Gallery extends React.Component {
     document.getElementsByClassName('modal-background')[0].style.display = 'none';
     await domtoimage.toBlob(document.getElementsByClassName('parent-div')[0], {bgcolor: 'white'})
     .then(function (blob) {
-        saveAs(blob, 'mu-nutrifact-label.png');
+        saveAs(blob, 'mutrition-label.png');
     });
     // revert to original
     document.getElementsByClassName('modal-background')[0].style.display = 'block';
