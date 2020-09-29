@@ -27,8 +27,8 @@ Clone this repository. You will need `node` and `npm` installed globally on your
 *For App.js:*
 `REACT_APP_LOGIN_URI
 REACT_APP_LOCAL_LOGIN_URI`
-*For Gallery.js:*
 
+*For Gallery.js:*
 `REACT_APP_LOGOUT_URI`
 `REACT_APP_LOCAL_LOGOUT_URI`
 
